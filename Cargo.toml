@@ -1,0 +1,12 @@
+[workspace]
+resolver = "3"
+members = ["kernel", "kernel-lib", "xtask"]
+# Host-side crates only: `cargo test`/`cargo clippy` at the root must not build the bare-metal kernel.
+# The kernel is checked and tested through `cargo xtask`.
+default-members = ["kernel-lib", "xtask"]
+
+[workspace.package]
+version = "0.1.0"
+authors = ["Hyunhoi Koo <hhoikoo00@gmail.com>"]
+edition = "2024"
+license = "Apache-2.0"

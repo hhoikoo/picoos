@@ -1,0 +1,10 @@
+{
+  // The kernel only exists for x86_64-unknown-none (e.g. `entry_point!` is cfg'd to x86_64).
+  // Analyze for that target; the sysroot sources still resolve `std` for the host-side xtask.
+  "rust-analyzer.cargo.target": "x86_64-unknown-none",
+  // The kernel's test binaries and libtest-less targets cannot be analyzed as host-style tests.
+  "rust-analyzer.cargo.allTargets": false,
+  // `cargo check --target x86_64-unknown-none` would fail for xtask, so check on save with
+  // the same bare-metal clippy command as the pre-commit hook.
+  "rust-analyzer.check.overrideCommand": ["cargo", "xtask", "check", "--message-format=json"]
+}

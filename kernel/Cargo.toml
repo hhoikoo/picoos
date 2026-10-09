@@ -1,0 +1,29 @@
+[package]
+name = "kernel"
+version.workspace = true
+authors.workspace = true
+edition.workspace = true
+license.workspace = true
+
+# No libtest on bare metal: the kernel is tested through the QEMU tests in tests/.
+[lib]
+test = false
+doctest = false
+
+[[bin]]
+name = "kernel"
+path = "src/main.rs"
+test = false
+
+[dependencies]
+bootloader_api = "0.11"
+kernel-lib = { path = "../kernel-lib" }
+
+# Kernel tests are bare-metal binaries that report through QEMU (no libtest harness).
+[[test]]
+name = "boot"
+harness = false
+
+[[test]]
+name = "first_boot"
+harness = false

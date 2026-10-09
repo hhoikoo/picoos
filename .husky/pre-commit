@@ -1,0 +1,8 @@
+#!/bin/sh
+# Runs the project checks before each commit. Installed automatically by husky-rs on `cargo test`.
+set -e
+
+cargo fmt --check
+cargo clippy --all-targets --locked -- -D warnings
+cargo test --locked
+cargo xtask check
